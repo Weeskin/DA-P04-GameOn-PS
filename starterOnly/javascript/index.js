@@ -1,16 +1,22 @@
-import { navEventClick } from './navEventClick.js';
+import {clickOnMenu} from "./clickOnMenu.js";
+import {toggleShowMenuBurger}  from "./menuBurger.js";
 
-navEventClick();
+
+
+
+clickOnMenu();
+toggleShowMenuBurger();
 
 // DOM Elements
-const modalbg = document.querySelector(".modal");
+const modal = document.querySelector(".modal");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 
-// launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+// Lance la modal sur tous les boutons ayant la classe modal-btn
+modalBtn.forEach((btn) =>
+    btn.addEventListener("click", () => {
+      modal.style.display = "block";
+    })
+);
 
-// launch modal form
-function launchModal() {
-  modalbg.style.display = "block";
-}
+

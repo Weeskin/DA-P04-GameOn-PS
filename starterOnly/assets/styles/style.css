@@ -41,7 +41,8 @@ p {
   float: right;
 }
 
-.header .main-navbar a {
+.header .main-navbar a,
+.header .menu-burger a {
   float: left;
   display: block;
   color: #000000;
@@ -53,13 +54,15 @@ p {
   font-family: Roboto, sans-serif;
 }
 
-.header .main-navbar a:hover {
+.header .main-navbar a:hover,
+.header .menu-burger a:hover {
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
 }
 
-.header .main-navbar a.active {
+.header .main-navbar a.active,
+.header .menu-burger a.active{
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
@@ -69,6 +72,7 @@ p {
   display: none;
   color: #ff0000;
 }
+
 
 /* MAIN */
 main {
