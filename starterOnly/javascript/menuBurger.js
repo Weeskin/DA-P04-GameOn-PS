@@ -4,15 +4,11 @@ const navbar = document.querySelector('.main-navbar');
 const menuBurgerBtn = document.querySelector('.icon-navbar') && document.querySelector('.fa-bars');
 const links = Array.from(navbar.querySelectorAll('a:not(.icon-navbar)'));
 const logo = document.querySelector('.header-logo');
+const menuBurger = document.querySelector('.menu-burger');
 
 export function toggleShowMenuBurger() {
     menuBurgerBtn.addEventListener('click', () => {
-        const menuBurger = document.querySelector('.menu-burger');
-        if (menuBurger) {
-            menuBurger.remove();
-        } else {
-            createMenuBurger();
-        }
+        menuBurger ? menuBurger.remove() : createMenuBurger();
     });
 
     //Si je clique sur aucun lien du menu burger, je ferme le menu burger
