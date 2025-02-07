@@ -5,7 +5,6 @@ const menuBurgerBtn = document.querySelector('.icon-navbar');
 const links = Array.from(navbar.querySelectorAll('a:not(.icon-navbar)'));
 const logo = document.querySelector('.header-logo');
 const menuBurger = document.querySelector('.menu-burger');
-console.log(links);
 
 export function initBurgerMenu() {
     menuBurgerBtn.addEventListener('click', () => {
