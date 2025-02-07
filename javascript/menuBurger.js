@@ -1,12 +1,13 @@
 // Création d'un menu burger
 const header = document.querySelector('#myTopnav');
 const navbar = document.querySelector('.main-navbar');
-const menuBurgerBtn = document.querySelector('.icon-navbar') && document.querySelector('.fa-bars');
+const menuBurgerBtn = document.querySelector('.icon-navbar');
 const links = Array.from(navbar.querySelectorAll('a:not(.icon-navbar)'));
 const logo = document.querySelector('.header-logo');
 const menuBurger = document.querySelector('.menu-burger');
+console.log(links);
 
-export function toggleShowMenuBurger() {
+export function initBurgerMenu() {
     menuBurgerBtn.addEventListener('click', () => {
         menuBurger ? menuBurger.remove() : createMenuBurger();
     });

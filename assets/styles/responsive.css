@@ -26,7 +26,8 @@
 
     .header .main-navbar a.icon-navbar {
         float: right;
-        display: block;
+        display: flex;
+        width: 100%;
     }
 
     .hero-headline{
@@ -42,7 +43,7 @@
     body{
         width:100vw;
     }
-    .header .main-navbar a {display: none;}
+
     .header .header-logo img {
         width: 30vw;
     }
