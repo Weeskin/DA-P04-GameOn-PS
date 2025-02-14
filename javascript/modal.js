@@ -7,9 +7,11 @@ const form = document.querySelector(".modal form");
 const radioButtons = document.querySelectorAll("input[type=radio]");
 const dataForms = [];
 
-// Fonction pour afficher ou masquer la modal
+// Fonction pour afficher ou masquer la modale
 export function showOrNotModal() {
+    // Ajoute un écouteur d'événement à chaque bouton de la modale pour ouvrir la modale
     modalBtn.forEach(btn => btn.addEventListener('click', openModal));
+    // Ajoute un écouteur d'événement à la modale pour la fermer si on clique en dehors de la modale ou sur le bouton de fermeture
     modal.addEventListener('click', event => {
         if (event.target === modal || event.target.classList.contains("close")) {
             closeModal();
@@ -17,33 +19,39 @@ export function showOrNotModal() {
     });
 }
 
-// Fonction pour basculer l'affichage de la modal
+// Fonction pour basculer l'affichage de la modale
 function openModal() {
+    // Alterne l'affichage de la modal entre "block" et "none"
     modal.style.display = modal.style.display === "block" ? "none" : "block";
     if (modal.style.display === "block") {
+        // Réinitialise le formulaire et vérifie les entrées du formulaire si la modale est ouverte
         resetForm();
         verificationInputModal();
     }
 }
 
-// Fonction pour fermer la modal
+// Fonction pour fermer la modale
 function closeModal() {
+    // Masque la modale et réinitialise le formulaire
     modal.style.display = "none";
     resetForm();
 }
 
-// Fonction pour vérifier les entrées du formulaire dans la modal
+// Fonction pour vérifier les entrées du formulaire dans la modale
 function verificationInputModal() {
+    // Ajoute un écouteur d'événement pour la soumission du formulaire
     form.addEventListener('submit', event => {
         event.preventDefault();
         let isValid = true;
         let allEmpty = true;
 
+        // Vérifie chaque entrée du formulaire
         inputs.forEach(input => {
             const value = input.value.trim();
             const errorMessage = getErrorMessage(input, value, input.id);
             let isRadioChecked = Array.from(radioButtons).some(radio => radio.checked);
 
+            // Affiche un message d'erreur si l'entrée est invalide
             if (errorMessage && errorMessage !== "Veuillez choisir une option." && errorMessage !== "Veuillez accepter les conditions.") {
                 input.style.border = "1px solid red";
                 showErrorMessage(input, errorMessage);
@@ -69,6 +77,7 @@ function verificationInputModal() {
 
 // Fonction pour obtenir le message d'erreur en fonction de l'entrée
 function getErrorMessage(input, value, id) {
+    // Définition des expressions régulières pour la validation des entrées
     const regexes = {
         first: /^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ-]{1,}$/,
         last: /^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ-]{1,}$/,
@@ -76,6 +85,7 @@ function getErrorMessage(input, value, id) {
         birthdate: /^\d{4}-\d{2}-\d{2}$/
     };
 
+    // Définition des messages d'erreur
     const messages = {
         required: "Ce champ est requis.",
         minLength: "Le texte doit contenir au moins 2 caractères.",
@@ -87,6 +97,7 @@ function getErrorMessage(input, value, id) {
         chooseOption: "Veuillez choisir une option."
     };
 
+    // Validation des entrées en fonction de leur id
     switch (id) {
         case "first":
         case "last":
@@ -110,7 +121,7 @@ function getErrorMessage(input, value, id) {
             break;
     }
 
-    // Validation for radio buttons with name "location"
+    // Validation des boutons radio
     if (!Array.from(radioButtons).some(radio => radio.checked)) {
         return messages.chooseOption;
     }
@@ -145,12 +156,14 @@ function removeErrorMessage(input) {
     }
 }
 
-
 // Fonction pour réinitialiser le formulaire
 function resetForm() {
+    // Réinitialise les cases à cocher et les boutons radio
     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => checkbox.checked = false);
     document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
+    // Supprime les messages d'erreur
     document.querySelectorAll('.error-message').forEach(errorMessage => errorMessage.remove());
+    // Réinitialise les valeurs des entrées et leur style
     inputs.forEach(input => {
         input.value = "";
         input.style.border = "1px solid #ccc";
@@ -169,6 +182,7 @@ function validateForm(isValid) {
     }
 }
 
+// Fonction pour créer une modale de succès
 function createSucessModal() {
     let successModal = document.createElement('div');
     successModal.classList.add('modal');
@@ -185,7 +199,7 @@ function createSucessModal() {
     `;
     document.body.appendChild(successModal);
 
-    // Add event listeners to close buttons
+    // Ajoute des écouteurs d'événement aux boutons de fermeture
     document.getElementById('closeSuccessSpan').addEventListener('click', closeSuccess);
     document.getElementById('closeSuccessSubmit').addEventListener('click', closeSuccess);
 }
