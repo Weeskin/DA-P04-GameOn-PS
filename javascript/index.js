@@ -1,7 +1,6 @@
-import {clickOnMenu} from "./clickOnMenu.js";
-import {initBurgerMenu}  from "./menuBurger.js";
-import {toggleModal} from "./modalToggle.js";
+import {navbarUnderlineOnClick, initBurgerMenu,} from "./navbar.js";
+import {showOrNotModal} from "./modal.js";
 
-clickOnMenu();
+navbarUnderlineOnClick();
 initBurgerMenu();
-toggleModal();
+showOrNotModal();

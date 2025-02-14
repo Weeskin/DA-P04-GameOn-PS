@@ -1,6 +1,6 @@
 @media screen and (max-width: 1660px) {
-    body{
-        width:88%;
+    body {
+        width: 88%;
     }
 
     .header .main-navbar a {
@@ -10,12 +10,13 @@
     .header .main-navbar a.icon-navbar {
         display: none;
     }
+
     footer {
         margin-left: -2vw;
     }
 }
 
-@media  screen and (max-width: 1240px) {
+@media screen and (max-width: 1240px) {
     body {
         width: 100%;
     }
@@ -30,7 +31,7 @@
         width: 100%;
     }
 
-    .hero-headline{
+    .hero-headline {
         font-size: 4.4rem;
     }
 
@@ -40,8 +41,8 @@
 }
 
 @media screen and (max-width: 800px) {
-    body{
-        width:100vw;
+    body {
+        width: 100vw;
     }
 
     .header .header-logo img {
@@ -52,34 +53,42 @@
         display: block;
         box-shadow: unset;
     }
+
     .hero-content {
         background: #fff;
         color: #000;
         padding: 20px;
     }
+
     .hero-content::after {
         content: unset;
     }
+
     .hero-content .btn-signup {
         display: none;
     }
+
     .hero-headline {
         font-size: 9vw;
         white-space: normal;
     }
+
     .hero-text {
         width: unset;
         font-size: 5vw;
     }
+
     .hero-img img {
         border-radius: 10px;
         margin-top: 40px;
     }
+
     .hero-section > .btn-signup {
         display: block;
         margin: 32px auto 10px;
         padding: 12px 35px;
     }
+
     .copyrights {
         margin-top: 8vw;
         text-align: center;
@@ -90,36 +99,37 @@
     .header {
         margin: 0 5vw;
     }
-    .header .header-logo img{
-       width: 26vw;
+
+    .header .header-logo img {
+        width: 26vw;
     }
 
-    main{
-        flex:0;
+    main {
+        flex: 0;
         margin: 0 5vw;
         padding: 0;
     }
 
     .hero-content {
-       padding: 0;
+        padding: 0;
     }
 
-    .hero-text{
+    .hero-text {
         margin-top: 20px;
         font-size: 3vw;
     }
 
-    .hero-section > .btn-signup{
+    .hero-section > .btn-signup {
         padding: 2.5vw 4.5vw;
         font-size: 4vw;
     }
 
-    footer{
+    footer {
         margin: 0 auto;
         height: auto;
     }
 
-    footer .copyrights{
+    footer .copyrights {
         font-size: 3vw;
     }
 }

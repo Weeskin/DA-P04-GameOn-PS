@@ -1,14 +1,24 @@
 // Création d'un menu burger
 const header = document.querySelector('#myTopnav');
-const navbar = document.querySelector('.main-navbar');
 const menuBurgerBtn = document.querySelector('.icon-navbar');
-const links = Array.from(navbar.querySelectorAll('a:not(.icon-navbar)'));
 const logo = document.querySelector('.header-logo');
-const menuBurger = document.querySelector('.menu-burger');
+const navbar = document.querySelector('.main-navbar');
+const links = navbar.querySelectorAll('a');
+const linksArray = Array.from(navbar.querySelectorAll('a:not(.icon-navbar)'));
+
+export function navbarUnderlineOnClick() {
+    // Event au click sur le bouton d'un des menus
+    for (let linksIdx = 0; linksIdx < links.length; linksIdx++) {
+        links[linksIdx].addEventListener('click', (event) => {
+            links.forEach((link) => link.classList.remove('active'));
+            event.target.classList.add('active');
+        });
+    }
+}
 
 export function initBurgerMenu() {
     menuBurgerBtn.addEventListener('click', () => {
-        menuBurger ? menuBurger.remove() : createMenuBurger();
+        navbar ? navbar.remove() : createMenuBurger();
     });
 
     //Si je clique sur aucun lien du menu burger, je ferme le menu burger
@@ -46,10 +56,10 @@ function createMenuBurger() {
     const logoChild = logoClone.firstElementChild;
     logoChild.style.width = '20vw';
     menuBurger.appendChild(logoClone);
-    links.forEach(link => {
+    linksArray.forEach(link => {
         const linkClone = link.cloneNode(true);
         linkClone.addEventListener('click', () => {
-            links.forEach((link) => link.classList.remove('active'));
+            linksArray.forEach((link) => link.classList.remove('active'));
             link.classList.add('active');
         });
         menuBurger.appendChild(linkClone);
@@ -73,4 +83,3 @@ function createMenuBurger() {
     // Ajouter la div menu-burger à la barre de navigation
     header.appendChild(menuBurger);
 }
-
