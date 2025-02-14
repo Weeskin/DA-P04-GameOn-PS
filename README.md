@@ -1,5 +1,9 @@
 # Projet GameOn
-1. Forkez ce repo ;
-2. Il est conseillé d'utiliser VisualStudio Code et vous pouvez utiliser Docker, mais ce n'est pas obligatoire ;
-3. Il n'y a aucune dépendance ;
-4. Vous ne devez utiliser que du CSS personnalisé et du JavaScript pur, sans jQuery, Bootstrap ou autre librairie.
+
+1. Modification de la navbar pour ajouter le "active" pour les éléments de la navbar cliqué.
+2. Ajout d'un menu burger pour les écrans de taille inférieure à 768px. Et revu du responsive.
+3. Ajout de la logique d'ouverture et fermeture de la modale
+4. Ajout de la vérification des inputs du formulaire
+5. Ajout de la logique de validation du formulaire
+6. Ajout de la confirmation d'envoi du formulaire
+7. Tests Manuels
