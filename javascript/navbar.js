@@ -1,4 +1,3 @@
-// Création d'un menu burger
 const header = document.querySelector('#myTopnav');
 const menuBurgerBtn = document.querySelector('.icon-navbar');
 const logo = document.querySelector('.header-logo');
@@ -7,7 +6,6 @@ const links = navbar.querySelectorAll('a');
 const linksArray = Array.from(navbar.querySelectorAll('a:not(.icon-navbar)'));
 
 export function navbarUnderlineOnClick() {
-    // Event au click sur le bouton d'un des menus
     for (let linksIdx = 0; linksIdx < links.length; linksIdx++) {
         links[linksIdx].addEventListener('click', (event) => {
             links.forEach((link) => link.classList.remove('active'));
@@ -18,23 +16,20 @@ export function navbarUnderlineOnClick() {
 
 export function initBurgerMenu() {
     menuBurgerBtn.addEventListener('click', () => {
-        navbar ? navbar.remove() : createMenuBurger();
+        const menuBurger = document.querySelector('.menu-burger');
+        menuBurger ? menuBurger.remove() : createMenuBurger();
     });
 
-    //Si je clique sur aucun lien du menu burger, je ferme le menu burger
     header.addEventListener('click', (event) => {
-        if (event.target !== menuBurgerBtn && event.target !== logo && !links.includes(event.target)) {
-            const menuBurger = document.querySelector('.menu-burger');
-            if (menuBurger) {
-                menuBurger.remove();
-                menuBurgerBtn.classList.remove('active');
-            }
+        const menuBurger = document.querySelector('.menu-burger');
+        if (menuBurger && !menuBurger.contains(event.target) && event.target !== menuBurgerBtn && event.target !== logo) {
+            menuBurger.remove();
+            menuBurgerBtn.classList.remove('active');
         }
     });
 }
 
 function createMenuBurger() {
-    // Créer la div menu-burger
     const menuBurger = document.createElement('div');
     menuBurger.classList.add('menu-burger');
     menuBurger.style.display = 'flex';
@@ -49,23 +44,23 @@ function createMenuBurger() {
     menuBurger.style.justifyContent = 'center';
     menuBurger.style.alignItems = 'center';
 
-    // Déplacer le logo et les liens du menu dans la div menu-burger
     const logoClone = logo.cloneNode(true);
     logoClone.style.marginBottom = '20px';
     logoClone.style.marginTop = '20px';
     const logoChild = logoClone.firstElementChild;
     logoChild.style.width = '20vw';
     menuBurger.appendChild(logoClone);
+
     linksArray.forEach(link => {
         const linkClone = link.cloneNode(true);
         linkClone.addEventListener('click', () => {
-            linksArray.forEach((link) => link.classList.remove('active'));
-            link.classList.add('active');
+            const allLinks = document.querySelectorAll('.menu-burger a');
+            allLinks.forEach((link) => link.classList.remove('active'));
+            linkClone.classList.add('active');
         });
         menuBurger.appendChild(linkClone);
     });
 
-    // Ajouter une croix pour fermer le menu burger
     const cross = document.createElement('span');
     cross.innerHTML = '&times;';
     cross.style.fontSize = '8vw';
@@ -80,6 +75,5 @@ function createMenuBurger() {
         menuBurger.remove();
     });
 
-    // Ajouter la div menu-burger à la barre de navigation
     header.appendChild(menuBurger);
 }

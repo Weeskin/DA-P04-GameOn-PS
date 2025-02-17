@@ -21,10 +21,8 @@ export function showOrNotModal() {
 
 // Fonction pour basculer l'affichage de la modale
 function openModal() {
-    // Alterne l'affichage de la modal entre "block" et "none"
-    modal.style.display = modal.style.display === "block" ? "none" : "block";
-    if (modal.style.display === "block") {
-        // Réinitialise le formulaire et vérifie les entrées du formulaire si la modale est ouverte
+    if (modal.style.display !== "block") {
+        modal.style.display = "block";
         resetForm();
         verificationInputModal();
     }
@@ -32,7 +30,6 @@ function openModal() {
 
 // Fonction pour fermer la modale
 function closeModal() {
-    // Masque la modale et réinitialise le formulaire
     modal.style.display = "none";
     resetForm();
 }
@@ -49,19 +46,12 @@ function verificationInputModal() {
         inputs.forEach(input => {
             const value = input.value.trim();
             const errorMessage = getErrorMessage(input, value, input.id);
-            let isRadioChecked = Array.from(radioButtons).some(radio => radio.checked);
 
             // Affiche un message d'erreur si l'entrée est invalide
-            if (errorMessage && errorMessage !== "Veuillez choisir une option." && errorMessage !== "Veuillez accepter les conditions.") {
+            if (errorMessage) {
                 input.style.border = "1px solid red";
                 showErrorMessage(input, errorMessage);
                 isValid = false;
-            } else if (errorMessage === "Veuillez choisir une option." && !isRadioChecked) {
-                const divForAllRadio = document.querySelector('.locations');
-                showErrorMessage(divForAllRadio, errorMessage);
-            } else if (errorMessage === "Veuillez accepter les conditions.") {
-                const divForAllCheckbox = document.querySelector('.checkboxCgu')
-                showErrorMessage(divForAllCheckbox, errorMessage);
             } else {
                 input.style.border = "1px solid green";
                 removeErrorMessage(input);
@@ -114,16 +104,18 @@ function getErrorMessage(input, value, id) {
         case "quantity":
             if (isNaN(value) || value < 0 || value > 99 || !value) return messages.invalidQuantity;
             break;
-        case "checkbox1":
-            if (!input.checked) return messages.acceptConditions;
-            break;
         default:
             break;
     }
 
     // Validation des boutons radio
-    if (!Array.from(radioButtons).some(radio => radio.checked)) {
+    if (input.type === "radio" && !Array.from(radioButtons).some(radio => radio.checked)) {
         return messages.chooseOption;
+    }
+
+    // Validation des cases à cocher
+    if (id === "checkbox1" && !input.checked) {
+        return messages.acceptConditions;
     }
 
     return undefined;
@@ -131,11 +123,15 @@ function getErrorMessage(input, value, id) {
 
 // Fonction pour afficher le message d'erreur
 function showErrorMessage(input, message) {
-    let errorElement = input.nextElementSibling;
-    if (!errorElement || !errorElement.classList.contains('error-message')) {
-        errorElement = document.createElement('div');
-        errorElement.classList.add('error-message');
-        input.parentNode.insertBefore(errorElement, input.nextSibling);
+    let errorElement;
+    if (input.type === "radio") {
+        const locationsDiv = document.querySelector('.locations');
+        errorElement = locationsDiv.nextElementSibling;
+        if (!errorElement || !errorElement.classList.contains('error-message')) {
+            errorElement = document.createElement('div');
+            errorElement.classList.add('error-message');
+            locationsDiv.parentNode.insertBefore(errorElement, locationsDiv.nextSibling);
+        }
     } else if (input.id === "checkbox1" && !input.checked) {
         const submitButton = document.querySelector('.btn-submit');
         errorElement = submitButton.previousElementSibling;
@@ -143,6 +139,13 @@ function showErrorMessage(input, message) {
             errorElement = document.createElement('div');
             errorElement.classList.add('error-message');
             submitButton.parentNode.insertBefore(errorElement, submitButton);
+        }
+    } else {
+        errorElement = input.nextElementSibling;
+        if (!errorElement || !errorElement.classList.contains('error-message')) {
+            errorElement = document.createElement('div');
+            errorElement.classList.add('error-message');
+            input.parentNode.insertBefore(errorElement, input.nextSibling);
         }
     }
     errorElement.textContent = message;
